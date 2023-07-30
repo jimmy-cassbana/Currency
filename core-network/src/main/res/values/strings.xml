@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- General Messages-->
+    <string name="network_error_message">Please make sure you are connected to the internet and try again</string>
+    <string name="unstable_network_error_message">The internet connection appears to be offline, try again</string>
+    <string name="unauthorized_error_message">Please request for a new OTP and try again.</string>
+    <string name="unknown_error_message">Something went wrong. Please try again.</string>
+
+
+
+</resources>

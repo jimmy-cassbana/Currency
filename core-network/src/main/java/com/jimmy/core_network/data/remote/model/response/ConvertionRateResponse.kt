@@ -1,4 +1,4 @@
-package com.jimmy.currency.network.model.response
+package com.jimmy.core_network.data.remote.model.response
 
 data class ConvertionRateResponse(
     val base: String,

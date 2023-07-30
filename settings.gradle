@@ -16,3 +16,5 @@ dependencyResolutionManagement {
 rootProject.name = "Currency"
 include ':app'
 include ':core-arch'
+include ':core-network'
+include ':core-data'

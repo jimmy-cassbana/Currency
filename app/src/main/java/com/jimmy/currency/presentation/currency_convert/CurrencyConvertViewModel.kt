@@ -3,7 +3,6 @@ package com.jimmy.currency.presentation.currency_convert
 import com.jimmy.core_arch.domain.DataState
 import com.jimmy.core_arch.presentation.viewmodel.MVIBaseViewModel
 import com.jimmy.currency.domain.usecase.CurrencyConvertUseCase
-import com.jimmy.currency.network.model.request.ConversionRatesRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
@@ -22,7 +21,7 @@ class CurrencyConvertViewModel @Inject constructor(
         return flow {
             when (action) {
                 is CurrencyConvertAction.GetConversionRates -> handleActionOfConvertCurrency(
-                    action.request,
+                    action.base,
                     this
                 )
             }
@@ -30,12 +29,12 @@ class CurrencyConvertViewModel @Inject constructor(
     }
 
     private suspend fun handleActionOfConvertCurrency(
-        request: ConversionRatesRequest,
+        base: String,
         flowCollector: FlowCollector<CurrencyConvertResult>
     ) {
         try {
             flowCollector.emit(CurrencyConvertResult.Loading)
-            val dataState = convertCurrency(request)
+            val dataState = convertCurrency(base)
             if (dataState is DataState.Success)
                 dataState.data.let {
                     flowCollector.emit(CurrencyConvertResult.Success(it))
