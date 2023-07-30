@@ -34,14 +34,4 @@ abstract class BaseFragment : Fragment() {
     fun setScreenTitle(text: String) {
         (activity as? BaseActivity)?.supportActionBar?.title = text
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                activity?.onBackPressed()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }

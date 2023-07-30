@@ -2,8 +2,8 @@ package com.jimmy.currency.domain.usecase
 
 import com.jimmy.core_arch.domain.DataState
 import com.jimmy.core_arch.domain.ISuspendableUseCase
+import com.jimmy.core_data.domain.repository.CurrencyRepository
 import com.jimmy.core_network.data.remote.model.response.ConvertionRateResponse
-import com.jimmy.currency.domain.repository.CurrencyRepository
 import javax.inject.Inject
 
 class CurrencyConvertUseCase @Inject constructor(
