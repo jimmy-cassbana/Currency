@@ -45,8 +45,6 @@ android {
 }
 
 dependencies {
-    implementation project(':core-arch')
-    implementation project(':core-network')
     implementation project(':core-data')
 
     implementation 'androidx.core:core-ktx:1.7.0'

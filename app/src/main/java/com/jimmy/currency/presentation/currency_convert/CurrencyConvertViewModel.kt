@@ -15,7 +15,8 @@ class CurrencyConvertViewModel @Inject constructor(
 ) :
     MVIBaseViewModel<CurrencyConvertAction, CurrencyConvertResult, CurrencyConvertViewState>() {
 
-    override val defaultViewState = CurrencyConvertViewState()
+    override val defaultViewState: CurrencyConvertViewState
+        get() = CurrencyConvertViewState()
 
     override fun handleAction(action: CurrencyConvertAction): Flow<CurrencyConvertResult> {
         return flow {
@@ -39,12 +40,12 @@ class CurrencyConvertViewModel @Inject constructor(
                 dataState.data.let {
                     flowCollector.emit(CurrencyConvertResult.Success(it))
                 }
-            else if (dataState is DataState.Error)
+            else if (dataState is DataState.Error) {
                 flowCollector.emit(CurrencyConvertResult.Failure(dataState.throwable))
+            }
         } catch (error: Throwable) {
             flowCollector.emit(CurrencyConvertResult.Failure(error))
         }
     }
-
 
 }

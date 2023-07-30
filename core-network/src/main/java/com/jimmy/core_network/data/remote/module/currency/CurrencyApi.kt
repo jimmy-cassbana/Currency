@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface CurrencyApi {
 
-    @GET("api/latest?access_key=1709d95d70a1074fddd006477f196dbad")
+    @GET("api/latest?access_key=1709d95d70a1074fdd006477f196dbad")
     suspend fun convertCurrency(@Query("base") base: String? = null): Response<ConvertionRateResponse>
 
 }
