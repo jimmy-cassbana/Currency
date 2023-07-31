@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.jimmy.core_arch.presentation.view.BaseFragment
 import com.jimmy.core_network.ext.getCustomException
 import com.jimmy.core_network.R
+import com.jimmy.currency.util.BindingFactory
 
 abstract class AppBaseFragment<VB : ViewBinding>(private val bindingFactory: BindingFactory<VB>) :
     BaseFragment() {

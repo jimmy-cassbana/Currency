@@ -1,4 +1,4 @@
-package com.jimmy.core_network.data.remote.base.Interceptor
+package com.jimmy.core_network.data.remote.base.interceptor
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext

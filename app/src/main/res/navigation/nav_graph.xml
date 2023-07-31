@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/currencyConvertFragment">
 
     <fragment
         android:id="@+id/currencyConvertFragment"
         android:name="com.jimmy.currency.presentation.currency_convert.CurrencyConvertFragment"
-        android:label="CurrencyConvertFragment" />
+        android:label="CurrencyConvertFragment"
+        tools:layout="@layout/fragment_currency_convert">
+        <action
+            android:id="@+id/action_currencyConvertFragment_to_currencyDetailsFragment"
+            app:destination="@id/currencyDetailsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/currencyDetailsFragment"
+        android:name="com.jimmy.currency.presentation.currency_details.CurrencyDetailsFragment"
+        android:label="CurrencyDetailsFragment"
+        tools:layout="@layout/fragment_currency_details" >
+
+        <argument
+            android:name="currencies"
+            app:argType="com.jimmy.currency.presentation.currency_details.popular.PopularCurrency[]" />
+    </fragment>
 
 </navigation>

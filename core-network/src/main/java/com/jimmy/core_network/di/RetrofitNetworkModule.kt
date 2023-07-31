@@ -3,7 +3,7 @@ package com.jimmy.core_network.di
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.jimmy.core_network.data.remote.base.Interceptor.ApiKeyInterceptor
+import com.jimmy.core_network.data.remote.base.interceptor.ApiKeyInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

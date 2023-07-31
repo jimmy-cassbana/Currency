@@ -5,6 +5,7 @@ import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.jimmy.currency.base.AppBaseFragment
 import com.jimmy.currency.databinding.FragmentCurrencyConvertBinding
 import com.leo.searchablespinner.SearchableSpinner
@@ -28,26 +29,38 @@ class CurrencyConvertFragment :
     }
 
     private fun initListeners() {
-        binding.etResult.keyListener = null
-        binding.etInput.doAfterTextChanged { convertCurrency() }
-        binding.spinnerTo.editText?.doAfterTextChanged { convertCurrency() }
-        binding.ibSwap.setOnClickListener {
-            val temp = binding.spinnerFrom.editText?.text
-            binding.spinnerFrom.editText?.text = binding.spinnerTo.editText?.text
-            binding.spinnerTo.editText?.text = temp
-        }
-        binding.spinnerFrom.editText?.doAfterTextChanged {
-            viewModel.executeAction(CurrencyConvertAction.GetConversionRates(it.toString()))
+        binding.apply {
+            etResult.keyListener = null
+            etInput.doAfterTextChanged { convertCurrency() }
+            spinnerTo.editText?.doAfterTextChanged { convertCurrency() }
+            spinnerFrom.editText?.doAfterTextChanged { convertCurrency() }
+            ibSwap.setOnClickListener {
+                val temp = binding.spinnerFrom.editText?.text
+                binding.spinnerFrom.editText?.text = binding.spinnerTo.editText?.text
+                binding.spinnerTo.editText?.text = temp
+            }
+            btnDetails.setOnClickListener {
+                findNavController().navigate(
+                    CurrencyConvertFragmentDirections
+                        .actionCurrencyConvertFragmentToCurrencyDetailsFragment(
+                            viewModel.getPopularCurrencies(currencyMap)
+                        )
+                )
+            }
         }
     }
 
     private fun convertCurrency() {
-        if (binding.etInput.text.toString().isEmpty()) return
-        val currency = binding.spinnerTo.editText?.text.toString()
+        if (binding.etInput.text.toString().isEmpty())
+            return
+        val baseCurrency = binding.spinnerFrom.editText?.text.toString()
+        val toCurrency = binding.spinnerTo.editText?.text.toString()
+        val baseCurVal = currencyMap[baseCurrency] ?: 0.0
+        val toCurVal = currencyMap[toCurrency] ?: 0.0
+
         val amount = binding.etInput.text.toString().toDouble()
-        currencyMap[currency]?.let { rate ->
-            binding.etResult.setText((amount * rate).toString())
-        }
+        val result = viewModel.convertCurrency(baseCurVal, toCurVal, amount)
+        binding.etResult.setText(result.toString())
     }
 
     private fun initSpinners() {

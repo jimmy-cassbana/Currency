@@ -1,4 +1,4 @@
-package com.jimmy.currency.base
+package com.jimmy.currency.util
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

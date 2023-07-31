@@ -1,8 +1,12 @@
 package com.jimmy.currency.presentation.currency_convert
 
+import android.util.Log
 import com.jimmy.core_arch.domain.DataState
 import com.jimmy.core_arch.presentation.viewmodel.MVIBaseViewModel
 import com.jimmy.currency.domain.usecase.CurrencyConvertUseCase
+import com.jimmy.currency.presentation.currency_details.popular.PopularCurrency
+import com.jimmy.currency.presentation.currency_details.popular.PopularCurrencyEnum
+import com.jimmy.currency.util.roundTwo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
@@ -48,4 +52,16 @@ class CurrencyConvertViewModel @Inject constructor(
         }
     }
 
+    fun convertCurrency(baseVal: Double, toVal: Double, amount: Double) =
+        ((amount * toVal) / baseVal).roundTwo()
+
+    fun getPopularCurrencies(currencyMap: HashMap<String, Double>): Array<PopularCurrency> {
+        var currencies = arrayOf<PopularCurrency>()
+        PopularCurrencyEnum.values().forEach { currency ->
+            currencyMap[currency.name]?.let {
+                currencies += PopularCurrency(currency.name, it)
+            }
+        }
+        return currencies
+    }
 }

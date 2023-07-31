@@ -30,8 +30,6 @@ abstract class BaseActivity : AppCompatActivity() {
             init()
             subscribe()
         }
-
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -47,14 +45,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun setScreenTitle(text: String) {
         supportActionBar?.title = text
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
 
