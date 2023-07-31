@@ -1,6 +1,5 @@
 package com.jimmy.currency.presentation.currency_convert
 
-import android.util.Log
 import com.jimmy.core_arch.domain.DataState
 import com.jimmy.core_arch.presentation.viewmodel.MVIBaseViewModel
 import com.jimmy.currency.domain.usecase.CurrencyConvertUseCase
@@ -26,8 +25,7 @@ class CurrencyConvertViewModel @Inject constructor(
         return flow {
             when (action) {
                 is CurrencyConvertAction.GetConversionRates -> handleActionOfConvertCurrency(
-                    action.base,
-                    this
+                    action.base, this
                 )
             }
         }

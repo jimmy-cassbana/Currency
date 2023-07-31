@@ -43,6 +43,8 @@ class CurrencyConvertFragment :
                 findNavController().navigate(
                     CurrencyConvertFragmentDirections
                         .actionCurrencyConvertFragmentToCurrencyDetailsFragment(
+                            getBaseCurrency(),
+                            getBaseValue().toFloat(),
                             viewModel.getPopularCurrencies(currencyMap)
                         )
                 )
@@ -53,13 +55,8 @@ class CurrencyConvertFragment :
     private fun convertCurrency() {
         if (binding.etInput.text.toString().isEmpty())
             return
-        val baseCurrency = binding.spinnerFrom.editText?.text.toString()
-        val toCurrency = binding.spinnerTo.editText?.text.toString()
-        val baseCurVal = currencyMap[baseCurrency] ?: 0.0
-        val toCurVal = currencyMap[toCurrency] ?: 0.0
-
         val amount = binding.etInput.text.toString().toDouble()
-        val result = viewModel.convertCurrency(baseCurVal, toCurVal, amount)
+        val result = viewModel.convertCurrency(getBaseValue(), getToValue(), amount)
         binding.etResult.setText(result.toString())
     }
 
@@ -110,6 +107,11 @@ class CurrencyConvertFragment :
     private fun setLoading(loading: Boolean) {
         binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
     }
+
+    private fun getBaseCurrency() = binding.spinnerFrom.editText?.text.toString()
+    private fun getToCurrency() = binding.spinnerTo.editText?.text.toString()
+    private fun getBaseValue() = currencyMap[getBaseCurrency()] ?: 0.0
+    private fun getToValue() = currencyMap[getToCurrency()] ?: 0.0
 
     companion object {
         const val EUR_KEY = "EUR"

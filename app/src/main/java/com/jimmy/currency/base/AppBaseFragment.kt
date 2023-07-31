@@ -18,7 +18,6 @@ abstract class AppBaseFragment<VB : ViewBinding>(private val bindingFactory: Bin
     var hasInitializedRootView = false
     private var rootView: View? = null
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

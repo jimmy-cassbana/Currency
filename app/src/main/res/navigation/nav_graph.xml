@@ -10,23 +10,36 @@
         android:name="com.jimmy.currency.presentation.currency_convert.CurrencyConvertFragment"
         android:label="CurrencyConvertFragment"
         tools:layout="@layout/fragment_currency_convert">
+
         <action
             android:id="@+id/action_currencyConvertFragment_to_currencyDetailsFragment"
             app:destination="@id/currencyDetailsFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
+            app:popExitAnim="@anim/exit_to_right"
+            app:restoreState="true" />
+
     </fragment>
+
     <fragment
         android:id="@+id/currencyDetailsFragment"
         android:name="com.jimmy.currency.presentation.currency_details.CurrencyDetailsFragment"
         android:label="CurrencyDetailsFragment"
-        tools:layout="@layout/fragment_currency_details" >
+        tools:layout="@layout/fragment_currency_details">
+
+        <argument
+            android:name="currencyKey"
+            app:argType="string" />
+
+        <argument
+            android:name="currencyValue"
+            app:argType="float" />
 
         <argument
             android:name="currencies"
             app:argType="com.jimmy.currency.presentation.currency_details.popular.PopularCurrency[]" />
+
     </fragment>
 
 </navigation>
