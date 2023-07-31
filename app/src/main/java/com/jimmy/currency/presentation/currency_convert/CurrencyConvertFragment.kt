@@ -2,7 +2,7 @@ package com.jimmy.currency.presentation.currency_convert
 
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.jimmy.currency.base.AppBaseFragment
@@ -18,21 +18,41 @@ class CurrencyConvertFragment :
     AppBaseFragment<FragmentCurrencyConvertBinding>(FragmentCurrencyConvertBinding::inflate) {
 
     private val viewModel: CurrencyConvertViewModel by viewModels()
-    private val currencyKeys = arrayListOf<String>()
+    private var currencyMap = HashMap<String, Double>()
     private var currencySpinner: SearchableSpinner? = null
     private var selectedEditText: EditText? = null
 
     override fun init() {
         super.init()
-        initViews()
-        viewModel.executeAction(CurrencyConvertAction.GetConversionRates("EUR"))
+        viewModel.executeAction(CurrencyConvertAction.GetConversionRates(EUR_KEY))
     }
 
-    private fun initViews() {
+    private fun initListeners() {
         binding.etResult.keyListener = null
+        binding.etInput.doAfterTextChanged { convertCurrency() }
+        binding.spinnerTo.editText?.doAfterTextChanged { convertCurrency() }
+        binding.ibSwap.setOnClickListener {
+            val temp = binding.spinnerFrom.editText?.text
+            binding.spinnerFrom.editText?.text = binding.spinnerTo.editText?.text
+            binding.spinnerTo.editText?.text = temp
+        }
+        binding.spinnerFrom.editText?.doAfterTextChanged {
+            viewModel.executeAction(CurrencyConvertAction.GetConversionRates(it.toString()))
+        }
+    }
+
+    private fun convertCurrency() {
+        if (binding.etInput.text.toString().isEmpty()) return
+        val currency = binding.spinnerTo.editText?.text.toString()
+        val amount = binding.etInput.text.toString().toDouble()
+        currencyMap[currency]?.let { rate ->
+            binding.etResult.setText((amount * rate).toString())
+        }
     }
 
     private fun initSpinners() {
+        val currencyKeys = arrayListOf<String>()
+        currencyMap.forEach { currencyKeys.add(it.key) }
         currencySpinner = SearchableSpinner(requireContext())
         currencySpinner?.setSpinnerListItems(currencyKeys)
         currencySpinner?.onItemSelectListener = object : OnItemSelectListener {
@@ -42,6 +62,7 @@ class CurrencyConvertFragment :
         }
         binding.spinnerFrom.editText?.let { addSpinnerAction(it) }
         binding.spinnerTo.editText?.let { addSpinnerAction(it) }
+        initListeners()
     }
 
     private fun addSpinnerAction(editText: EditText) {
@@ -50,6 +71,7 @@ class CurrencyConvertFragment :
             selectedEditText = editText
             currencySpinner?.show()
         }
+        editText.setText(EUR_KEY)
     }
 
     override fun subscribe() {
@@ -63,18 +85,20 @@ class CurrencyConvertFragment :
         setLoading(viewState.loading)
         when {
             viewState.result != null -> {
-                viewState.result.rates.forEach {
-                    currencyKeys.add(it.key)
-                    initSpinners()
-                }
+                currencyMap = viewState.result.rates
+                if (currencySpinner == null) initSpinners()
             }
             viewState.error != null -> {
-                Toast.makeText(requireContext(), viewState.error.message, Toast.LENGTH_SHORT).show()
+                handleError(viewState.error)
             }
         }
     }
 
     private fun setLoading(loading: Boolean) {
         binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        const val EUR_KEY = "EUR"
     }
 }

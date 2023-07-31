@@ -2,7 +2,6 @@ package com.jimmy.core_network.data.remote.base.exception
 
 import android.content.Context
 import com.jimmy.core_network.R
-import com.jimmy.core_network.data.remote.base.exception.ResponseError
 import java.net.HttpURLConnection.HTTP_GATEWAY_TIMEOUT
 
 /**
