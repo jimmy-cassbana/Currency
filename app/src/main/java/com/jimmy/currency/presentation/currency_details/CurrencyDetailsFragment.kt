@@ -17,6 +17,6 @@ class CurrencyDetailsFragment :
         super.init()
         val rates = viewModel.calculateConversionRates(
             args.currencyKey, args.currencyValue, args.currencies)
-        binding.ratesRecycler.adapter = CurrencyRatesAdapter(rates)
+        binding.ratesRecycler.adapter = CurrencyRatesAdapter(rates.take(10))
     }
 }

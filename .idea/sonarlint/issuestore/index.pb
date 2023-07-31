@@ -5,16 +5,6 @@ y
 Icore-arch/src/main/java/com/jimmy/core_arch/domain/ISuspendableUseCase.kt,a/8/a8227366ef8342e35fb5c55ce9eb2fd0c83f7b58
 É
 Score-arch/src/main/java/com/jimmy/core_arch/presentation/viewmodel/BaseViewModel.kt,a/8/a8e591bd1d19e29f52768c6dfe0bbb406d48d943
-F
-core-data/build.gradle,5/5/55f4c47c1b1acc7ae643dcc70bbb70b758750030
-I
-core-network/build.gradle,9/f/9f6e8fdc80fcbc824c852cf7ffec33203d26d9fb
-é
-^app/src/main/java/com/jimmy/currency/presentation/currency_convert/CurrencyConvertViewState.kt,c/7/c797f30503283b768c152bd9ad15a2a42be3f5bc
-F
-core-arch/build.gradle,8/9/8960977bb96826d2d0301763d9bd79ec4f8e51d7
-}
-Mcore-arch/src/main/java/com/jimmy/core_arch/presentation/view/BaseFragment.kt,e/f/ef72c75abccd0dc35942ffafb2c20a6dcec35722
 >
 app/.gitignore,5/1/51e1c5d383dfaa35e0e7e5873a0a99355a86880f
 :
@@ -48,8 +38,6 @@ fcore-network/src/main/java/com/jimmy/core_network/data/remote/model/response/Co
 Score-data/src/main/java/com/jimmy/core_data/domain/repository/CurrencyRepository.kt,3/c/3ce04d2bbda68466791f83fd358350dca9fbb4be
 r
 Bcore-data/src/main/java/com/jimmy/core_data/di/RepositoryModule.kt,1/d/1d067067591696ce6e42a471306902d8bcaaf026
-Ñ
-Tcore-data/src/main/java/com/jimmy/core_data/data/repository/CurrencyRepositoryImp.kt,d/5/d56b5a7046279e56aeaa5e7281da847cded72d45
 g
 7core-arch/src/main/java/com/jimmy/core_arch/MVIBases.kt,d/e/deb54be405ab042b5742168220520e0ae9437041
 s
@@ -58,8 +46,6 @@ Ccore-arch/src/main/java/com/jimmy/core_arch/CoroutineDispatchers.kt,9/9/9901e9
 Mcore-arch/src/main/java/com/jimmy/core_arch/presentation/view/BaseActivity.kt,5/6/560149f753e7b3e9721e37ebf9d4e344c31e8a04
 ê
 `core-network/src/main/java/com/jimmy/core_network/data/remote/base/exception/CustomExceptions.kt,5/e/5ea714fb4e85364a034e6df4017b6a5a93a52c18
-ã
-[app/src/main/java/com/jimmy/currency/presentation/currency_convert/CurrencyConvertAction.kt,4/d/4d30433abbda7a9f648d5495998c34e2fb921350
 ?
 settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
 A
