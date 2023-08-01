@@ -5,6 +5,10 @@ plugins {
     id 'com.google.dagger.hilt.android'
 }
 
+def configPropertiesFile = rootProject.file("config.properties")
+def configProperties = new Properties()
+configProperties.load(new FileInputStream(configPropertiesFile))
+
 android {
     namespace 'com.jimmy.core_network'
     compileSdk 33
@@ -13,6 +17,8 @@ android {
         minSdk 24
         targetSdk 33
 
+        buildConfigField("String", "BASE_URL", "\"${configProperties['baseURL']}\"")
+        buildConfigField("String", "API_KEY", "\"${configProperties['apiKey']}\"")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }

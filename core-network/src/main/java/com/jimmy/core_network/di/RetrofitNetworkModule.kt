@@ -3,6 +3,7 @@ package com.jimmy.core_network.di
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jimmy.core_network.BuildConfig
 import com.jimmy.core_network.data.remote.base.interceptor.ApiKeyInterceptor
 import dagger.Module
 import dagger.Provides
@@ -49,7 +50,7 @@ object RetrofitNetworkModule {
     fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("http://data.fixer.io/")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()

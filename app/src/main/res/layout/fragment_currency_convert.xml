@@ -23,10 +23,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/tvAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:text="@string/eur_key" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,10 +51,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/tvtRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:text="@string/eur_key" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

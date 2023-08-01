@@ -5,4 +5,6 @@
     <string name="convert_arrow">convert arrow</string>
     <string name="details">Details</string>
     <string name="arrow_image">arrow image</string>
+    <string name="details_title"><![CDATA[History selection & popular currencies rates]]></string>
+    <string name="eur_key">EUR</string>
 </resources>
