@@ -6,6 +6,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.jimmy.core_database.entity.HistorySelection
 import com.jimmy.currency.base.AppBaseFragment
 import com.jimmy.currency.databinding.FragmentCurrencyConvertBinding
 import com.leo.searchablespinner.SearchableSpinner
@@ -28,12 +29,12 @@ class CurrencyConvertFragment :
         viewModel.executeAction(CurrencyConvertAction.GetConversionRates(EUR_KEY))
     }
 
-    private fun initListeners() {
+    private fun initListeners(date: String) {
         binding.apply {
             etResult.keyListener = null
-            etInput.doAfterTextChanged { convertCurrency() }
-            spinnerTo.editText?.doAfterTextChanged { convertCurrency() }
-            spinnerFrom.editText?.doAfterTextChanged { convertCurrency() }
+            etInput.doAfterTextChanged { convertCurrency(date) }
+            spinnerTo.editText?.doAfterTextChanged { convertCurrency(date) }
+            spinnerFrom.editText?.doAfterTextChanged { convertCurrency(date) }
             ibSwap.setOnClickListener {
                 val temp = binding.spinnerFrom.editText?.text
                 binding.spinnerFrom.editText?.text = binding.spinnerTo.editText?.text
@@ -52,15 +53,26 @@ class CurrencyConvertFragment :
         }
     }
 
-    private fun convertCurrency() {
+    private fun convertCurrency(date: String) {
         if (binding.etInput.text.toString().isEmpty())
             return
         val amount = binding.etInput.text.toString().toDouble()
         val result = viewModel.convertCurrency(getBaseValue(), getToValue(), amount)
+        viewModel.executeAction(
+            CurrencyConvertAction.SaveHistorySelection(
+                HistorySelection(
+                    date = date,
+                    fromCurrency = getBaseCurrency(),
+                    toCurrency = getToCurrency(),
+                    fromValue = amount.toString(),
+                    toValue = result.toString()
+                )
+            )
+        )
         binding.etResult.setText(result.toString())
     }
 
-    private fun initSpinners() {
+    private fun initSpinners(date: String) {
         val currencyKeys = arrayListOf<String>()
         currencyMap.forEach { currencyKeys.add(it.key) }
         currencySpinner = SearchableSpinner(requireContext())
@@ -72,7 +84,7 @@ class CurrencyConvertFragment :
         }
         binding.spinnerFrom.editText?.let { addSpinnerAction(it) }
         binding.spinnerTo.editText?.let { addSpinnerAction(it) }
-        initListeners()
+        initListeners(date)
     }
 
     private fun addSpinnerAction(editText: EditText) {
@@ -96,7 +108,7 @@ class CurrencyConvertFragment :
         when {
             viewState.result != null -> {
                 currencyMap = viewState.result.rates
-                if (currencySpinner == null) initSpinners()
+                if (currencySpinner == null) initSpinners(viewState.result.date)
             }
             viewState.error != null -> {
                 handleError(viewState.error)

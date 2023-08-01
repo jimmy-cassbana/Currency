@@ -2,7 +2,9 @@ package com.jimmy.currency.presentation.currency_convert
 
 import com.jimmy.core_arch.domain.DataState
 import com.jimmy.core_arch.presentation.viewmodel.MVIBaseViewModel
+import com.jimmy.core_database.entity.HistorySelection
 import com.jimmy.currency.domain.usecase.CurrencyConvertUseCase
+import com.jimmy.currency.domain.usecase.SaveHistorySelectionUseCase
 import com.jimmy.currency.presentation.currency_details.popular.PopularCurrency
 import com.jimmy.currency.presentation.currency_details.popular.PopularCurrencyEnum
 import com.jimmy.currency.util.roundTwo
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CurrencyConvertViewModel @Inject constructor(
-    private val convertCurrency: CurrencyConvertUseCase
+    private val convertCurrency: CurrencyConvertUseCase,
+    private val saveSelectionUseCase: SaveHistorySelectionUseCase
 ) :
     MVIBaseViewModel<CurrencyConvertAction, CurrencyConvertResult, CurrencyConvertViewState>() {
 
@@ -27,7 +30,23 @@ class CurrencyConvertViewModel @Inject constructor(
                 is CurrencyConvertAction.GetConversionRates -> handleActionOfConvertCurrency(
                     action.base, this
                 )
+                is CurrencyConvertAction.SaveHistorySelection -> handleActionOfSaveSelection(
+                    action.selection,
+                    this
+                )
             }
+        }
+    }
+
+    private suspend fun handleActionOfSaveSelection(
+        selection: HistorySelection,
+        flowCollector: FlowCollector<CurrencyConvertResult>
+    ) {
+        try {
+            saveSelectionUseCase(selection)
+            flowCollector.emit(CurrencyConvertResult.SelectionSaved)
+        } catch (error: Throwable) {
+            flowCollector.emit(CurrencyConvertResult.Failure(error))
         }
     }
 

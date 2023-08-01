@@ -22,6 +22,15 @@ sealed class CurrencyConvertResult : Result<CurrencyConvertViewState> {
         )
     }
 
+    object SelectionSaved : CurrencyConvertResult() {
+        override fun reduce(
+            defaultState: CurrencyConvertViewState,
+            oldState: CurrencyConvertViewState
+        ) = defaultState.copy(
+            isSelectionSaved = true
+        )
+    }
+
     data class Failure(val error: Throwable) : CurrencyConvertResult() {
         override fun reduce(
             defaultState: CurrencyConvertViewState,

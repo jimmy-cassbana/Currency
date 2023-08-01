@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.jimmy.core_database.HistorySelection
+import com.jimmy.core_database.entity.HistorySelection
 
 @Dao
 interface HistoryDao {
@@ -13,7 +13,7 @@ interface HistoryDao {
     suspend fun getHistory(): List<HistorySelection>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveHistory(history: HistorySelection): Long
+    suspend fun saveHistory(selection: HistorySelection): Long
 
     @Query("DELETE FROM history")
     suspend fun deleteHistory()

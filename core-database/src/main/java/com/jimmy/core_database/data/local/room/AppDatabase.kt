@@ -2,7 +2,7 @@ package com.jimmy.core_database.data.local.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.jimmy.core_database.HistorySelection
+import com.jimmy.core_database.entity.HistorySelection
 import com.jimmy.core_database.data.local.history.HistoryDao
 import com.jimmy.core_database.data.local.room.AppDatabase.Companion.DATABASE_VERSION
 
