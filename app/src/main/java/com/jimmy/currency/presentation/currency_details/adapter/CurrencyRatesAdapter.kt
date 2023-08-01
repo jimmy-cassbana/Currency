@@ -1,4 +1,4 @@
-package com.jimmy.currency.presentation.currency_details
+package com.jimmy.currency.presentation.currency_details.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

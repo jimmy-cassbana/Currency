@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/arrow_image"
         android:src="@drawable/ic_arrow"
-        app:layout_constraintEnd_toStartOf="@id/tvRate"
-        app:layout_constraintStart_toEndOf="@id/tvCurrency"
+        app:layout_constraintEnd_toStartOf="@id/tvCurrency"
+        app:layout_constraintStart_toEndOf="@id/tvRate"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

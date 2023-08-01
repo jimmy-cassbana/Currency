@@ -9,6 +9,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toStartOf="@id/ratesRecycler"
         app:layout_constraintStart_toStartOf="parent" />
 
