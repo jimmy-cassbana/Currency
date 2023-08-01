@@ -9,7 +9,7 @@ import com.jimmy.core_database.entity.HistorySelection
 @Dao
 interface HistoryDao {
 
-    @Query("SELECT * from history")
+    @Query("SELECT * from history WHERE date > (SELECT DATETIME('now', '-3 day'))")
     suspend fun getHistory(): List<HistorySelection>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

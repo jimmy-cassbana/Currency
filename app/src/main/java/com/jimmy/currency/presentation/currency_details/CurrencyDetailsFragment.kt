@@ -1,6 +1,5 @@
 package com.jimmy.currency.presentation.currency_details
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -41,18 +40,14 @@ class CurrencyDetailsFragment :
                 val map = viewState.historyList.groupBy { it.date }
                 val items = arrayListOf<HistoryItem>()
                 map.entries.forEach {
-                    Log.d("JIMO", it.key)
                     items.add(HistoryItem(it.key))
                     it.value.forEach { selection ->
-                        Log.d("JIMO", selection.toCurrency)
                         items.add(HistoryItem(body = selection))
                     }
                 }
-                Log.d("JIMO", items.size.toString())
                 binding.historyRecycler.adapter =
                     SelectionHistoryAdapter(items)
             }
-
             viewState.error != null -> {
                 handleError(viewState.error)
             }
