@@ -42,6 +42,7 @@ class CurrencyConvertViewModel @Inject constructor(
         selection: HistorySelection,
         flowCollector: FlowCollector<CurrencyConvertResult>
     ) {
+        if (selection.fromCurrency == selection.toCurrency) return
         try {
             saveSelectionUseCase(selection)
             flowCollector.emit(CurrencyConvertResult.SelectionSaved)

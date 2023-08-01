@@ -1,4 +1,4 @@
-package com.jimmy.currency.presentation.currency_details.history
+package com.jimmy.currency.presentation.currency_details
 
 import com.jimmy.core_arch.Action
 
